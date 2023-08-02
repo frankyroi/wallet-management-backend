@@ -2,7 +2,7 @@
 
 This is the backend implementation for a wallet management web application that enables users and admins to manage wallets. It provides endpoints for user authentication, user management, wallet management, and invitation acceptance.
 
-git clone <repository_url>
+git clone https://github.com/frankyroi/wallet-management-backend.git
 cd wallet-management-backend
 
 npm install
