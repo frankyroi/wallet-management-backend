@@ -6,10 +6,10 @@ class NewDataSource extends typeorm_1.DataSource {
     constructor() {
         super({
             type: 'postgres',
-            host: 'dpg-cj528vc5kgrc73fr7fj0-a',
+            host: 'localhost',
             port: 5432,
             username: 'baeldung',
-            password: 'Rpwqx0sqZlQa3zpjFP2yYFC2i12xR9t4',
+            password: 'baeldung',
             database: 'wallet_management',
             entities: ["dist/entities/*.js"],
             migrations: ["dist/migrations/*.js"],

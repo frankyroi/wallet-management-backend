@@ -14,10 +14,7 @@ const express_1 = require("express");
 const walletController_1 = require("../controllers/walletController");
 const authMiddleware_1 = require("../middlewares/authMiddleware");
 const router = (0, express_1.Router)();
-router.get("/", walletController_1.getAllWallets);
 router.post("/", walletController_1.createWallet);
-router.put("/:id", walletController_1.updateWallet);
-router.delete("/:id", walletController_1.deleteWallet);
 router.get("/data/:id", walletController_1.getWalletById);
 router.post("/deposit", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if ((0, authMiddleware_1.isAuthRequest)(req)) {

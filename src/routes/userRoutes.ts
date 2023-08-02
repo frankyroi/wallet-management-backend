@@ -1,10 +1,9 @@
 import { Router, Request } from "express";
-import { inviteUser, getAllUsers, getUserById, toggleUser } from "../controllers/userController";
+import { getAllUsers, getUserById, toggleUser } from "../controllers/userController";
 import { isAuthRequest } from "../middlewares/authMiddleware";
 
 const router = Router();
 
-router.post("/invite", inviteUser);
 router.get("/", getAllUsers);
 router.get("/:id", getUserById);
 

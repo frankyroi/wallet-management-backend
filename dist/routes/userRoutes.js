@@ -14,7 +14,6 @@ const express_1 = require("express");
 const userController_1 = require("../controllers/userController");
 const authMiddleware_1 = require("../middlewares/authMiddleware");
 const router = (0, express_1.Router)();
-router.post("/invite", userController_1.inviteUser);
 router.get("/", userController_1.getAllUsers);
 router.get("/:id", userController_1.getUserById);
 router.put("/toggle", (req, res) => __awaiter(void 0, void 0, void 0, function* () {

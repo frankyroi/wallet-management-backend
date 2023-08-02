@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.withdrawFunds = exports.transferFunds = exports.depositFunds = exports.getUserAndWallet = exports.deleteWallet = exports.updateWallet = exports.getWalletById = exports.getAllWallets = exports.createWallet = void 0;
+exports.withdrawFunds = exports.transferFunds = exports.depositFunds = exports.getUserAndWallet = exports.getWalletById = exports.createWallet = void 0;
 const typeorm_1 = require("typeorm");
 const Wallet_1 = require("../entities/Wallet");
 const User_1 = require("../entities/User");
@@ -34,18 +34,6 @@ const createWallet = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.createWallet = createWallet;
-const getAllWallets = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const walletRepository = (0, typeorm_1.getRepository)(Wallet_1.Wallet);
-        const wallets = yield walletRepository.find();
-        return res.status(200).json({ wallets });
-    }
-    catch (error) {
-        console.error("Get all wallets error:", error);
-        res.status(500).json({ message: "An error occurred while fetching the wallets." });
-    }
-});
-exports.getAllWallets = getAllWallets;
 const getWalletById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
@@ -62,45 +50,6 @@ const getWalletById = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.getWalletById = getWalletById;
-const updateWallet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.params;
-    const { name, balance } = req.body;
-    try {
-        const walletRepository = (0, typeorm_1.getRepository)(Wallet_1.Wallet);
-        // const wallet = await walletRepository.findOne(id);
-        const wallet = yield walletRepository.findOne({ where: { id: parseInt(id) } });
-        if (!wallet) {
-            return res.status(404).json({ message: "Wallet not found." });
-        }
-        wallet.name = name;
-        wallet.balance = balance;
-        yield walletRepository.save(wallet);
-        return res.status(200).json({ message: "Wallet updated successfully.", wallet });
-    }
-    catch (error) {
-        console.error("Update wallet error:", error);
-        res.status(500).json({ message: "An error occurred while updating the wallet." });
-    }
-});
-exports.updateWallet = updateWallet;
-const deleteWallet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.params;
-    try {
-        const walletRepository = (0, typeorm_1.getRepository)(Wallet_1.Wallet);
-        // const wallet = await walletRepository.findOne(id);
-        const wallet = yield walletRepository.findOne({ where: { id: parseInt(id) } });
-        if (!wallet) {
-            return res.status(404).json({ message: "Wallet not found." });
-        }
-        yield walletRepository.remove(wallet);
-        return res.status(200).json({ message: "Wallet deleted successfully." });
-    }
-    catch (error) {
-        console.error("Delete wallet error:", error);
-        res.status(500).json({ message: "An error occurred while deleting the wallet." });
-    }
-});
-exports.deleteWallet = deleteWallet;
 const getUserAndWallet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.user.id;
     try {

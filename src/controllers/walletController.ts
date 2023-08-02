@@ -29,17 +29,6 @@ export const createWallet = async (req: Request, res: Response) => {
   }
 };
 
-export const getAllWallets = async (_req: Request, res: Response) => {
-  try {
-    const walletRepository = getRepository(Wallet);
-    const wallets = await walletRepository.find();
-
-    return res.status(200).json({ wallets });
-  } catch (error) {
-    console.error("Get all wallets error:", error);
-    res.status(500).json({ message: "An error occurred while fetching the wallets." });
-  }
-};
 
 export const getWalletById = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -56,51 +45,6 @@ export const getWalletById = async (req: Request, res: Response) => {
   } catch (error) {
     console.error("Get wallet by ID error:", error);
     res.status(500).json({ message: "An error occurred while fetching the wallet." });
-  }
-};
-
-export const updateWallet = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { name, balance } = req.body;
-
-  try {
-    const walletRepository = getRepository(Wallet);
-    // const wallet = await walletRepository.findOne(id);
-    const wallet = await walletRepository.findOne({ where: { id: parseInt(id) } });
-
-    if (!wallet) {
-      return res.status(404).json({ message: "Wallet not found." });
-    }
-
-    wallet.name = name;
-    wallet.balance = balance;
-    await walletRepository.save(wallet);
-
-    return res.status(200).json({ message: "Wallet updated successfully.", wallet });
-  } catch (error) {
-    console.error("Update wallet error:", error);
-    res.status(500).json({ message: "An error occurred while updating the wallet." });
-  }
-};
-
-export const deleteWallet = async (req: Request, res: Response) => {
-  const { id } = req.params;
-
-  try {
-    const walletRepository = getRepository(Wallet);
-    // const wallet = await walletRepository.findOne(id);
-    const wallet = await walletRepository.findOne({ where: { id: parseInt(id) } });
-
-    if (!wallet) {
-      return res.status(404).json({ message: "Wallet not found." });
-    }
-
-    await walletRepository.remove(wallet);
-
-    return res.status(200).json({ message: "Wallet deleted successfully." });
-  } catch (error) {
-    console.error("Delete wallet error:", error);
-    res.status(500).json({ message: "An error occurred while deleting the wallet." });
   }
 };
 
